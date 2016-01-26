@@ -9,10 +9,10 @@
 
 
         var allGeemails = window.geemails;
-		
+		var inboxCount;
 
         // Create geemails
-		var getGeemails = function(index){
+		var getGeemails = function(inboxCount){
 
 			var msgDate;
 			var msgSubject;
@@ -30,7 +30,8 @@
 				}
 
 				// Check if first 10 are loaded, if so create new ones
-				if(index>9){
+				if(inboxCount>9){
+				
 				var newGeemail = getNewMessage();
 				msgDate = newGeemail.date;
 				msgSubject = newGeemail.subject;
@@ -39,10 +40,10 @@
 
 			}
 			else{
-				msgDate = allGeemails[index].date;
-				msgSubject = allGeemails[index].subject;
-				msgSender = allGeemails[index].sender;
-				msgBody = allGeemails[index].body;
+				msgDate = allGeemails[inboxCount].date;
+				msgSubject = allGeemails[inboxCount].subject;
+				msgSender = allGeemails[inboxCount].sender;
+				msgBody = allGeemails[inboxCount].body;
 			}
 
 
@@ -50,7 +51,6 @@
 			var inbox = document.getElementById("inbox");
 			var newEmail = document.createElement("div");
 			newEmail.className = "not-clicked";
-			newEmail.style.maxHeight = "150px";
 			email.date = document.createElement("p");
 			email.date.className = "email-date";
 			email.date.innerHTML = msgDate.toString().substring(4, 21);
@@ -64,21 +64,24 @@
 			email.body.className = "email-body";
 			email.body.innerHTML = msgBody;
 			email.body.style.color = "gray";
-			
 
 			// Section turns white when clicked
 			 inbox.onclick = function(event){
 			 	if(event.target.className === "not-clicked" && event.target.localName === "div"){
+			 		
+			 		event.target.childNodes[3].style.overflow = "visible";
 			 		event.target.childNodes[3].style.color = "white"; // [3] is email-body
 			 		event.target.className = "clicked";
 			 	}
 			 	else if (event.target.localName === "div"){
+			 		event.target.childNodes[3].style.overflow = "hidden";
 			 		event.target.childNodes[3].style.color = "gray";
 			 		event.target.className = "not-clicked";
 			 	}
 			 	else{
 			 		return;
 			 	}
+			
 			}	
 
 
@@ -90,17 +93,27 @@
 
 			// Add emails to inbox
 			inbox.appendChild(newEmail);
-	
+
+
+
+			// Show inbox count
+			var content = document.getElementById("inbox-content");
+			content.innerHTML = "Inbox (" + inboxCount + ")";
+
 		 }; // End function for creating geemails
 
 
 		 // Create first 10 geemails
-		 for(var i=0; i<allGeemails.length; i++){
-		 getGeemails(i);
+		 for(var inboxCount=0; inboxCount<allGeemails.length; inboxCount++){
+		 getGeemails(inboxCount);
 		}
 
 		// Create new geemails every ~seconds
-		setInterval(function(){ getGeemails(10) }, 3000);
+		setInterval(function(){ getGeemails(inboxCount++) }, 15000);
+
+
+
+
 
 		
 };
@@ -112,7 +125,7 @@
 
 			<!-- Geemail Header -->
 			<div class="GeeMail">
-				<h1>GeeMail</h1>
+				<h1><a href="file:///C:/Users/Malia/Documents/GitHub/gee-mail/index.html"><img id="img" src="http://findicons.com/icon/download/130152/mail_alt/128/png?id=369060" />GeeMail</a></h1>
 
 
 
@@ -121,9 +134,7 @@
 			<!-- list of emails -->
 			<div class="geemail-content">
 			
-				<div id="inbox-counter"></div>
-				
-
+			<div id="inbox-content"></div>
 					<div id="inbox">
 						
 					</div>

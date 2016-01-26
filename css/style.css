@@ -9,18 +9,33 @@ h1{
 }
 
 
-p{
+p{	
 	display: inline-block;
 	height: 38px;
 	width: 25%;
 	overflow: hidden;
 }
 
+
 .clicked{
 	cursor: pointer;
 	color: white;
+	/*background-color: #cceeff;*/
 }
 
 .not-clicked{
 	cursor: pointer;
+	/*background-color: #99ddff;*/
+}
+
+#img{
+	height: 75px;
+}
+
+a{ 	
+	text-decoration: none;
+}
+
+a:hover{
+	color: #ff80c0;
 }
