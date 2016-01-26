@@ -6,13 +6,99 @@
       window.onload = function(){
         // ALL OF YOUR JAVASCRIPT CODE SHOULD GO HERE. 
         // We have to use window.onload so your JavaScript doesn't execute until the page has loaded and all HTML has been downloaded to your browser
-        
-      };
+
+
+        var allGeemails = window.geemails;
+
+
+		// displaying initial emails
+		for (var i=0; i<10; i++){
+
+			var msgDate = allGeemails[i].date;
+			var msgSubject = allGeemails[i].subject;
+			var msgSender = allGeemails[i].sender;
+			var msgBody = allGeemails[i].body;
+
+			// Email skellie
+			var email = {
+				date: '',
+				sender: '',
+				subject: '',
+				body: ''
+			};
+
+			// Create new email, with date, sender, subject, and body attached
+			var inbox = document.getElementById("inbox");
+			var newEmail = document.createElement("div");
+			newEmail.className = "not-clicked";
+			newEmail.style.maxHeight = "150px";
+
+			email.date = document.createElement("p");
+			email.date.className = "email-date";
+			email.date.innerHTML = msgDate.toString().substring(4, 21);
+			email.sender = document.createElement("p");
+			email.sender.className = "email-sender";
+			email.sender.innerHTML = msgSender;
+			email.subject = document.createElement("p");
+			email.subject.className = "email-subject";
+			email.subject.innerHTML = msgSubject;
+			email.body = document.createElement("p");
+			email.body.className = "email-body";
+			email.body.innerHTML = msgBody;
+			email.body.style.color = "gray";
+			
+			// Section turns white when clicked
+			 inbox.onclick = function(event){
+			 	if(event.target.className === "not-clicked" && event.target.localName === "div"){
+			 		event.target.childNodes[3].style.color = "white"; // [3] is email-body
+			 		event.target.className = "clicked";
+			 	}
+			 	else if (event.target.localName === "div"){
+			 		event.target.childNodes[3].style.color = "gray";
+			 		event.target.className = "not-clicked";
+			 	}
+			 	else{
+			 		return;
+			 	}
+			}	
+
+
+			// Add info to new email
+			for (var key in email){
+				newEmail.appendChild(email[key]);
+			};
+
+			// Add emails to inbox
+			inbox.appendChild(newEmail);
+
+		 }; // end display for initial emails
+
+
+		
+
+
+};
+      
     </script>
 	</head>
 	<body>
 		<div class="container" id="main">
-			Hello World!
-		</div>
+
+			<!-- Geemail Header -->
+			<div class="GeeMail">
+				<h1>GeeMail</h1>
+
+
+
+			</div>
+
+			<!-- list of emails -->
+			<div class="geemail-content">
+				
+
+					<div id="inbox">Inbox</div>
+
+				</div>	
+			</div>
 	</body>
 </html>
