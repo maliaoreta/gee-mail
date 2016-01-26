@@ -9,30 +9,48 @@
 
 
         var allGeemails = window.geemails;
+		
 
+        // Create geemails
+		var getGeemails = function(index){
 
-		// displaying initial emails
-		for (var i=0; i<10; i++){
+			var msgDate;
+			var msgSubject;
+			var msgSender;
+			var msgBody;
 
-			var msgDate = allGeemails[i].date;
-			var msgSubject = allGeemails[i].subject;
-			var msgSender = allGeemails[i].sender;
-			var msgBody = allGeemails[i].body;
+			
 
-			// Email skellie
-			var email = {
-				date: '',
-				sender: '',
-				subject: '',
-				body: ''
-			};
+				// Email skellie
+				function email(date, sender, subject, body){
+					this.date = date;
+					this.seder= sender;
+					this.subject= subject;
+					this.body= body;
+				}
+
+				// Check if first 10 are loaded, if so create new ones
+				if(index>9){
+				var newGeemail = getNewMessage();
+				msgDate = newGeemail.date;
+				msgSubject = newGeemail.subject;
+				msgSender = newGeemail.sender;
+				msgBody = newGeemail.body;
+
+			}
+			else{
+				msgDate = allGeemails[index].date;
+				msgSubject = allGeemails[index].subject;
+				msgSender = allGeemails[index].sender;
+				msgBody = allGeemails[index].body;
+			}
+
 
 			// Create new email, with date, sender, subject, and body attached
 			var inbox = document.getElementById("inbox");
 			var newEmail = document.createElement("div");
 			newEmail.className = "not-clicked";
 			newEmail.style.maxHeight = "150px";
-
 			email.date = document.createElement("p");
 			email.date.className = "email-date";
 			email.date.innerHTML = msgDate.toString().substring(4, 21);
@@ -47,6 +65,7 @@
 			email.body.innerHTML = msgBody;
 			email.body.style.color = "gray";
 			
+
 			// Section turns white when clicked
 			 inbox.onclick = function(event){
 			 	if(event.target.className === "not-clicked" && event.target.localName === "div"){
@@ -68,15 +87,22 @@
 				newEmail.appendChild(email[key]);
 			};
 
+
 			// Add emails to inbox
 			inbox.appendChild(newEmail);
+	
+		 }; // End function for creating geemails
 
-		 }; // end display for initial emails
 
+		 // Create first 10 geemails
+		 for(var i=0; i<allGeemails.length; i++){
+		 getGeemails(i);
+		}
+
+		// Create new geemails every ~seconds
+		setInterval(function(){ getGeemails(10) }, 3000);
 
 		
-
-
 };
       
     </script>
@@ -94,9 +120,14 @@
 
 			<!-- list of emails -->
 			<div class="geemail-content">
+			
+				<div id="inbox-counter"></div>
 				
 
-					<div id="inbox">Inbox</div>
+					<div id="inbox">
+						
+					</div>
+
 
 				</div>	
 			</div>
