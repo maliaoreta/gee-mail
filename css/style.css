@@ -1,5 +1,5 @@
 body{
-	background-color: #80dfff;
+	background-image: url("http://i.imgur.com/kLEnZ9o.jpg");
 }
 
 
@@ -7,6 +7,7 @@ h1{
 	color: #ffffff;
 	text-shadow: 3px 3px 3px #00ace6;
 }
+
 
 
 p{	
@@ -17,25 +18,17 @@ p{
 }
 
 
-.clicked{
-	cursor: pointer;
-	color: white;
-	/*background-color: #cceeff;*/
-}
-
-.not-clicked{
-	cursor: pointer;
-	/*background-color: #99ddff;*/
-}
-
 #img{
 	height: 75px;
 }
+
 
 a{ 	
 	text-decoration: none;
 }
 
-a:hover{
-	color: #ff80c0;
+.geemail-content{
+	width: 1125px;
+	float: right;
 }
+

@@ -50,32 +50,48 @@
 			// Create new email, with date, sender, subject, and body attached
 			var inbox = document.getElementById("inbox");
 			var newEmail = document.createElement("div");
-			newEmail.className = "not-clicked";
+			newEmail.className = "not-clicked"; // Entire email div w/ date, sender, sub, body as 'p's
+				newEmail.style.borderStyle = "ridge";
+				newEmail.style.backgroundColor = "white";
+				newEmail.style.opacity = ".65";
+				newEmail.style.padding = "5px";
+
+
 			email.date = document.createElement("p");
-			email.date.className = "email-date";
-			email.date.innerHTML = msgDate.toString().substring(4, 21);
+				email.date.className = "email-date";
+				email.date.innerHTML = msgDate.toString().substring(4, 21);
+				email.date.style.fontWeight = "bolder";
 			email.sender = document.createElement("p");
-			email.sender.className = "email-sender";
-			email.sender.innerHTML = msgSender;
+				email.sender.className = "email-sender";
+				email.sender.innerHTML = msgSender;
+				email.sender.style.fontWeight = "bolder";
 			email.subject = document.createElement("p");
-			email.subject.className = "email-subject";
-			email.subject.innerHTML = msgSubject;
+				email.subject.className = "email-subject";
+				email.subject.innerHTML = msgSubject;
+				email.subject.style.fontWeight = "bolder";
 			email.body = document.createElement("p");
-			email.body.className = "email-body";
-			email.body.innerHTML = msgBody;
-			email.body.style.color = "gray";
+				email.body.className = "email-body";
+				email.body.innerHTML = msgBody;
+				email.body.style.fontStyle = "italic";
 
 			// Section turns white when clicked
 			 inbox.onclick = function(event){
 			 	if(event.target.className === "not-clicked" && event.target.localName === "div"){
-			 		
-			 		event.target.childNodes[3].style.overflow = "visible";
-			 		event.target.childNodes[3].style.color = "white"; // [3] is email-body
+			 		// Mark emails read
+			 		event.target.childNodes[0].style.fontWeight = "normal";
+			 		event.target.childNodes[1].style.fontWeight = "normal";
+			 		event.target.childNodes[2].style.fontWeight = "normal";
+
+			 		event.target.childNodes[3].style.fontStyle = "normal";
+			 		event.target.childNodes[3].style.color = "black";
+
+			 		event.target.childNodes[3].style.overflow = "visible"; // Show full email body content
+			 	
+
 			 		event.target.className = "clicked";
 			 	}
 			 	else if (event.target.localName === "div"){
 			 		event.target.childNodes[3].style.overflow = "hidden";
-			 		event.target.childNodes[3].style.color = "gray";
 			 		event.target.className = "not-clicked";
 			 	}
 			 	else{
@@ -112,29 +128,34 @@
 		setInterval(function(){ getGeemails(inboxCount++) }, 15000);
 
 
-
-
-
 		
 };
       
     </script>
 	</head>
 	<body>
+
 		<div class="container" id="main">
+
+		<!-- <img id="background" src="http://i.imgur.com/kLEnZ9o.jpg" /> -->
+
+		<title>GeeMail</title>
 
 			<!-- Geemail Header -->
 			<div class="GeeMail">
-				<h1><a href="file:///C:/Users/Malia/Documents/GitHub/gee-mail/index.html"><img id="img" src="http://findicons.com/icon/download/130152/mail_alt/128/png?id=369060" />GeeMail</a></h1>
-
+				
+				<h1><a href="file:///C:/Users/Malia/Documents/GitHub/gee-mail/index.html" title="Refresh the page!"><img id="img" src="http://findicons.com/icon/download/130152/mail_alt/128/png?id=369060" />GeeMail</a></h1>
+		
 
 
 			</div>
 
+
+			<div id="inbox-content"></div>
+
 			<!-- list of emails -->
 			<div class="geemail-content">
 			
-			<div id="inbox-content"></div>
 					<div id="inbox">
 						
 					</div>
