@@ -48,56 +48,51 @@
 
 
 			// Create new email, with date, sender, subject, and body attached
-			var inbox = document.getElementById("inbox");
+			var inbox = document.getElementsByClassName("geemail-content")[0];
 			var newEmail = document.createElement("div");
 			newEmail.className = "not-clicked"; // Entire email div w/ date, sender, sub, body as 'p's
 				newEmail.style.borderStyle = "ridge";
+				newEmail.style.borderRadius = "10px";
 				newEmail.style.backgroundColor = "white";
 				newEmail.style.opacity = ".65";
 				newEmail.style.padding = "5px";
 
 
 			email.date = document.createElement("p");
-				email.date.className = "email-date";
+				email.date.className = "not-clicked";
 				email.date.innerHTML = msgDate.toString().substring(4, 21);
 				email.date.style.fontWeight = "bolder";
 			email.sender = document.createElement("p");
-				email.sender.className = "email-sender";
+				email.sender.className = "not-clicked";
 				email.sender.innerHTML = msgSender;
 				email.sender.style.fontWeight = "bolder";
 			email.subject = document.createElement("p");
-				email.subject.className = "email-subject";
+				email.subject.className = "not-clicked";
 				email.subject.innerHTML = msgSubject;
 				email.subject.style.fontWeight = "bolder";
 			email.body = document.createElement("p");
-				email.body.className = "email-body";
+				email.body.className = "not-clicked";
 				email.body.innerHTML = msgBody;
 				email.body.style.fontStyle = "italic";
 
-			// Section turns white when clicked
+
+				// Opening and closing emails
 			 inbox.onclick = function(event){
-			 	if(event.target.className === "not-clicked" && event.target.localName === "div"){
-			 		// Mark emails read
-			 		event.target.childNodes[0].style.fontWeight = "normal";
-			 		event.target.childNodes[1].style.fontWeight = "normal";
-			 		event.target.childNodes[2].style.fontWeight = "normal";
-
-			 		event.target.childNodes[3].style.fontStyle = "normal";
-			 		event.target.childNodes[3].style.color = "black";
-
-			 		event.target.childNodes[3].style.overflow = "visible"; // Show full email body content
-			 	
-
+			 	if(event.target.className === "not-clicked" && event.target.localName ==="div"
+			 		|| event.target.className === "read" && event.target.localName === "div"){
+			 		event.target.childNodes[0].className = "clicked";
+			 		event.target.childNodes[1].className = "clicked";
+			 		event.target.childNodes[2].className = "clicked";
+			 		event.target.childNodes[3].className = "clicked";
 			 		event.target.className = "clicked";
 			 	}
-			 	else if (event.target.localName === "div"){
-			 		event.target.childNodes[3].style.overflow = "hidden";
-			 		event.target.className = "not-clicked";
-			 	}
 			 	else{
-			 		return;
-			 	}
-			
+			 		event.target.childNodes[0].className = "read";
+			 		event.target.childNodes[1].className = "read";
+			 		event.target.childNodes[2].className = "read";
+			 		event.target.childNodes[3].className = "read";
+			 		event.target.className = "read"
+			 	}			
 			}	
 
 
@@ -114,7 +109,9 @@
 
 			// Show inbox count
 			var content = document.getElementById("inbox-content");
+			inboxCount = inboxCount + 1;
 			content.innerHTML = "Inbox (" + inboxCount + ")";
+			content.style.fontWeight = "bold";
 
 		 }; // End function for creating geemails
 
@@ -144,7 +141,7 @@
 			<!-- Geemail Header -->
 			<div class="GeeMail">
 				
-				<h1><a href="file:///C:/Users/Malia/Documents/GitHub/gee-mail/index.html" title="Refresh the page!"><img id="img" src="http://findicons.com/icon/download/130152/mail_alt/128/png?id=369060" />GeeMail</a></h1>
+				<h1><a href="file:///C:/Users/Malia/Documents/GitHub/gee-mail/index.html" title="Refresh the page!"><img id="img" src="http://findicons.com/files/icons/725/colobrush/128/mail_envelope.png" />GeeMail</a></h1>
 		
 
 
